@@ -26,7 +26,7 @@ export const Route = createFileRoute("/prn/$slug")({
       ],
     };
   },
-  component: ProductPage;
+  component: ProductPage,
 });
 
 const why = [
@@ -52,7 +52,7 @@ function ProductPage() {
   const { qtyOf, add } = useCart();
   const [variantIdx, setVariantIdx] = useState(0);
   const variants = product.variants ?? [{ unit: product.unit, price: product.price }];
-  const variant = variants[variantIdx];
+  const variant = variants[variantIdx] ?? variants[0]!;
   const category = categoryBySlug(product.category);
   const similar = productsByCategory(product.category).filter((p) => p.id !== product.id);
   const qty = qtyOf(product.id);

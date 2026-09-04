@@ -10,33 +10,90 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as CartRouteImport } from './routes/cart'
+import { Route as CategoriesRouteImport } from './routes/categories'
+import { Route as SRouteImport } from './routes/s'
+import { Route as CnSlugRouteImport } from './routes/cn.$slug'
+import { Route as PrnSlugRouteImport } from './routes/prn.$slug'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const CartRoute = CartRouteImport.update({
+  id: '/cart',
+  path: '/cart',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CategoriesRoute = CategoriesRouteImport.update({
+  id: '/categories',
+  path: '/categories',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SRoute = SRouteImport.update({
+  id: '/s',
+  path: '/s',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CnSlugRoute = CnSlugRouteImport.update({
+  id: '/cn/$slug',
+  path: '/cn/$slug',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PrnSlugRoute = PrnSlugRouteImport.update({
+  id: '/prn/$slug',
+  path: '/prn/$slug',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/cart': typeof CartRoute
+  '/categories': typeof CategoriesRoute
+  '/s': typeof SRoute
+  '/cn/$slug': typeof CnSlugRoute
+  '/prn/$slug': typeof PrnSlugRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/cart': typeof CartRoute
+  '/categories': typeof CategoriesRoute
+  '/s': typeof SRoute
+  '/cn/$slug': typeof CnSlugRoute
+  '/prn/$slug': typeof PrnSlugRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/cart': typeof CartRoute
+  '/categories': typeof CategoriesRoute
+  '/s': typeof SRoute
+  '/cn/$slug': typeof CnSlugRoute
+  '/prn/$slug': typeof PrnSlugRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths: '/' | '/cart' | '/categories' | '/s' | '/cn/$slug' | '/prn/$slug'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to: '/' | '/cart' | '/categories' | '/s' | '/cn/$slug' | '/prn/$slug'
+  id:
+    | '__root__'
+    | '/'
+    | '/cart'
+    | '/categories'
+    | '/s'
+    | '/cn/$slug'
+    | '/prn/$slug'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  CartRoute: typeof CartRoute
+  CategoriesRoute: typeof CategoriesRoute
+  SRoute: typeof SRoute
+  CnSlugRoute: typeof CnSlugRoute
+  PrnSlugRoute: typeof PrnSlugRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -48,11 +105,51 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/cart': {
+      id: '/cart'
+      path: '/cart'
+      fullPath: '/cart'
+      preLoaderRoute: typeof CartRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/categories': {
+      id: '/categories'
+      path: '/categories'
+      fullPath: '/categories'
+      preLoaderRoute: typeof CategoriesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/s': {
+      id: '/s'
+      path: '/s'
+      fullPath: '/s'
+      preLoaderRoute: typeof SRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/cn/$slug': {
+      id: '/cn/$slug'
+      path: '/cn/$slug'
+      fullPath: '/cn/$slug'
+      preLoaderRoute: typeof CnSlugRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/prn/$slug': {
+      id: '/prn/$slug'
+      path: '/prn/$slug'
+      fullPath: '/prn/$slug'
+      preLoaderRoute: typeof PrnSlugRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  CartRoute: CartRoute,
+  CategoriesRoute: CategoriesRoute,
+  SRoute: SRoute,
+  CnSlugRoute: CnSlugRoute,
+  PrnSlugRoute: PrnSlugRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

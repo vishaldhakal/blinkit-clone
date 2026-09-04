@@ -4,12 +4,12 @@ export type Product = {
   name: string;
   unit: string;
   price: number;
-  mrp?: number;
+  mrp?: number | undefined;
   emoji: string;
   tint: string;
   category: string; // category slug
   details?: Record<string, string>;
-  variants?: { unit: string; price: number; mrp?: number }[];
+  variants?: { unit: string; price: number; mrp?: number | undefined }[];
 };
 
 export type Category = {
