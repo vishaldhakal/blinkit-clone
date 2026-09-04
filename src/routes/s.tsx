@@ -4,7 +4,7 @@ import { searchProducts } from "@/lib/data";
 
 export const Route = createFileRoute("/s")({
   validateSearch: (search: Record<string, unknown>) => ({
-    q: typeof search.q === "string" ? search.q : "",
+    q: typeof search['q'] === "string" ? (search['q'] as string) : "",
   }),
   head: () => ({
     meta: [
