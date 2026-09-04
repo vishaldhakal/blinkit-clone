@@ -26,7 +26,7 @@ export const Route = createFileRoute("/prn/$slug")({
       ],
     };
   },
-  component: ProductPage;
+  component: ProductPage,
 });
 
 const why = [
