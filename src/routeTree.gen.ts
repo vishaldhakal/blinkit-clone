@@ -15,6 +15,7 @@ import { Route as CartRouteImport } from './routes/cart'
 import { Route as CategoriesRouteImport } from './routes/categories'
 import { Route as SRouteImport } from './routes/s'
 import { Route as AdminIndexRouteImport } from './routes/admin.index'
+import { Route as AdminOrdersRouteImport } from './routes/admin.orders'
 import { Route as AdminPosRouteImport } from './routes/admin.pos'
 import { Route as CnSlugRouteImport } from './routes/cn.$slug'
 import { Route as PrnSlugRouteImport } from './routes/prn.$slug'
@@ -49,6 +50,11 @@ const AdminIndexRoute = AdminIndexRouteImport.update({
   path: '/',
   getParentRoute: () => AdminRoute,
 } as any)
+const AdminOrdersRoute = AdminOrdersRouteImport.update({
+  id: '/orders',
+  path: '/orders',
+  getParentRoute: () => AdminRoute,
+} as any)
 const AdminPosRoute = AdminPosRouteImport.update({
   id: '/pos',
   path: '/pos',
@@ -71,6 +77,7 @@ export interface FileRoutesByFullPath {
   '/cart': typeof CartRoute
   '/categories': typeof CategoriesRoute
   '/s': typeof SRoute
+  '/admin/orders': typeof AdminOrdersRoute
   '/admin/pos': typeof AdminPosRoute
   '/cn/$slug': typeof CnSlugRoute
   '/prn/$slug': typeof PrnSlugRoute
@@ -81,6 +88,7 @@ export interface FileRoutesByTo {
   '/cart': typeof CartRoute
   '/categories': typeof CategoriesRoute
   '/s': typeof SRoute
+  '/admin/orders': typeof AdminOrdersRoute
   '/admin/pos': typeof AdminPosRoute
   '/cn/$slug': typeof CnSlugRoute
   '/prn/$slug': typeof PrnSlugRoute
@@ -93,6 +101,7 @@ export interface FileRoutesById {
   '/cart': typeof CartRoute
   '/categories': typeof CategoriesRoute
   '/s': typeof SRoute
+  '/admin/orders': typeof AdminOrdersRoute
   '/admin/pos': typeof AdminPosRoute
   '/cn/$slug': typeof CnSlugRoute
   '/prn/$slug': typeof PrnSlugRoute
@@ -106,6 +115,7 @@ export interface FileRouteTypes {
     | '/cart'
     | '/categories'
     | '/s'
+    | '/admin/orders'
     | '/admin/pos'
     | '/cn/$slug'
     | '/prn/$slug'
@@ -116,6 +126,7 @@ export interface FileRouteTypes {
     | '/cart'
     | '/categories'
     | '/s'
+    | '/admin/orders'
     | '/admin/pos'
     | '/cn/$slug'
     | '/prn/$slug'
@@ -127,6 +138,7 @@ export interface FileRouteTypes {
     | '/cart'
     | '/categories'
     | '/s'
+    | '/admin/orders'
     | '/admin/pos'
     | '/cn/$slug'
     | '/prn/$slug'
@@ -187,6 +199,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AdminIndexRouteImport
       parentRoute: typeof AdminRoute
     }
+    '/admin/orders': {
+      id: '/admin/orders'
+      path: '/orders'
+      fullPath: '/admin/orders'
+      preLoaderRoute: typeof AdminOrdersRouteImport
+      parentRoute: typeof AdminRoute
+    }
     '/admin/pos': {
       id: '/admin/pos'
       path: '/pos'
@@ -212,11 +231,13 @@ declare module '@tanstack/react-router' {
 }
 
 interface AdminRouteChildren {
+  AdminOrdersRoute: typeof AdminOrdersRoute
   AdminPosRoute: typeof AdminPosRoute
   AdminIndexRoute: typeof AdminIndexRoute
 }
 
 const AdminRouteChildren: AdminRouteChildren = {
+  AdminOrdersRoute: AdminOrdersRoute,
   AdminPosRoute: AdminPosRoute,
   AdminIndexRoute: AdminIndexRoute,
 }
